@@ -9,7 +9,7 @@ export default function DayListItem(props) {
     if (spotsLeft === 0) {
       return "no spots remaining"
     }
-    if (spotsLeft  < 5) {
+    if (spotsLeft  < 10) {
       return `${spotsLeft} spot${spotsLeft>1? "s":""} remaining`;
     }
 
@@ -17,7 +17,7 @@ export default function DayListItem(props) {
   }
 
   // conditional rendering of class
-  
+
   let dayListClass;
   if(props.selected) dayListClass = classnames(`day-list__item--selected`)
   else dayListClass = classnames(`day-list__item`)

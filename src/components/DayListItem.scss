@@ -21,6 +21,7 @@
     &--selected {
       background-color: darken($white, 5%);
       color: $dark-background;
+      padding-left: 2rem;
 
       &:hover {
         background-color: darken($white, 5%);
@@ -29,6 +30,11 @@
 
     &--full {
       opacity: $inactive-opacity;
+      padding-left: 2rem;
+
+      &:hover {
+        background-color: rgb(207, 11, 102);
+      }
     }
   }
 }
