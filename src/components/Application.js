@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 import "components/Application.scss";
 import DayList from "components/DayList";
+import Appointment from "./Appointment/index"
 
 const days = [
   {
@@ -21,6 +22,56 @@ const days = [
     spots: 0,
   },
 ];
+
+const appointments = [
+  {
+    id: 1,
+    time: "12pm",
+  },
+  {
+    id: 2,
+    time: "1pm",
+    interview: {
+      student: "Lydia eMiller-Jones",
+      interviewer: {
+        id: 1,
+        name: "Colins Palmer",
+        avatar: "https://i.imgur.com/LpaY82x.png",
+      }
+    }
+  },
+  {
+    id: 3,
+    time: "2pm",
+  },
+  {
+    id: 4,
+    time: "3pm",
+    interview: {
+      student: "Olivia king",
+      interviewer: {
+        id: 3,
+        name: "henry Palmer",
+        avatar: "https://i.imgur.com/twYrpay.jpg"
+      }
+    }
+  },
+  {
+    id: "last",
+    time: "4pm",
+    interview: {
+      student: "Olivia kimaryng",
+      interviewer: {
+        id: 4,
+        name: "henry Palmer",
+        avatar: "https://i.imgur.com/twYrpay.jpg"
+      }
+    }
+  }
+];
+
+
+
 export default function Application(props) {
   const [day, setDay] = useState("Monday")
   return (
@@ -48,6 +99,11 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
+
+          {appointments.map(appointment => 
+          <Appointment key = {appointment.id} {...appointment}/> 
+          )}
+
       </section>
     </main>
   );
