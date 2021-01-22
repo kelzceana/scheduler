@@ -6,7 +6,6 @@ import Show from "./Show"
 import Form from "./Form"
 import {useVisualMode} from "../../hooks/useVisualMode"
 
-
 import 'components/Appointment/styles.scss'
 
   const interviewer = {
@@ -19,6 +18,7 @@ import 'components/Appointment/styles.scss'
   const SHOW = "SHOW";
   const CREATE = "CREATE"
 
+   
 
 export default function Appointment(props) {
   
@@ -26,6 +26,18 @@ export default function Appointment(props) {
       props.interview? SHOW : EMPTY
 
   )
+
+  //FUNCTION save
+
+  function save (name, interviewer) {
+    
+    const interview = {
+      student: name,
+      interviewer
+    };
+    props.bookInterview(props.id, interview)
+   // console.log(interview) ;
+  }
 
   return (
     <article className="appointment">
@@ -40,10 +52,8 @@ export default function Appointment(props) {
        />
        )}
        {mode === CREATE &&( <Form 
-       name=""
        interviewers= {props.interviewers}
-       value = {""}
-       onSave = {event=>transition(EMPTY)}
+       onSave = {save}
        onCancel= {event=>transition(EMPTY)}
        />)}
     </article>
