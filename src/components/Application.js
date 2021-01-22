@@ -90,18 +90,25 @@ export default function Application(props) {
   //FUNCTION bookInterview
 
   function bookInterview(id, interview) {
-    console.log(id,interview)
+    //console.log(id,interview)
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
     };
-
+  
     const appointments = {
       ...state.appointments,
       [id]: appointment
     };
 
-    setState({...state, appointments})
+    const response = axios.put(`/api/appointments/${id}`, {"interview":interview}).then(() =>
+      setState({
+        ...state,
+        appointments
+      })
+    
+    )
+    return response;
   }
  
 
