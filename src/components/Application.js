@@ -86,21 +86,30 @@ export default function Application(props) {
   },[]);
 
   
-
-  /**
-   * 
-   *  
-  console.log(dailyAppointments)
-   * 
-   * {dailyAppointments.map(appointment => 
-          
-   */
   
+  //FUNCTION bookInterview
+
+  function bookInterview(id, interview) {
+    console.log(id,interview)
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    setState({...state, appointments})
+  }
+ 
 
   const setDay = day => setState({ ...state, day });
   const dailyAppointments =  getAppointmentsForDay(state, state.day);
   const schedule = dailyAppointments.map(appointment => {
       const dailyInterview = getInterview(state, appointment.interview);
+     // console.log(dailyInterview)
       const interviewersArray = getInterviewersForDay(state, state.day); 
       return (
         <Appointment 
@@ -109,11 +118,12 @@ export default function Application(props) {
           id= {appointment.id}
           time={appointment.time}
           interview= {dailyInterview}
+          bookInterview= {bookInterview}
           /> 
         )});
-  
 
-  //console.log(state)
+        
+  
   return (
     <main className="layout">
       <section className="sidebar">
