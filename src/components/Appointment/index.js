@@ -6,6 +6,7 @@ import Show from "./Show"
 import Form from "./Form"
 import {useVisualMode} from "../../hooks/useVisualMode"
 
+
 import 'components/Appointment/styles.scss'
 
   const interviewer = {
@@ -40,7 +41,7 @@ export default function Appointment(props) {
        )}
        {mode === CREATE &&( <Form 
        name=""
-       interviewers= {[]}
+       interviewers= {props.interviewers}
        value = {""}
        onSave = {event=>transition(EMPTY)}
        onCancel= {event=>transition(EMPTY)}
