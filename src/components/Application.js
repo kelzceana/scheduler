@@ -61,7 +61,6 @@ import {getInterview} from "../helpers/selectors"
 
 
 export default function Application(props) {
-
   const {
     state,
     setDay,
@@ -70,6 +69,8 @@ export default function Application(props) {
   } = useApplicationData();
  
   const dailyAppointments =  getAppointmentsForDay(state, state.day);
+  
+  console.log(dailyAppointments)
   const schedule = dailyAppointments.map(appointment => {
       const dailyInterview = getInterview(state, appointment.interview);
     
@@ -85,9 +86,6 @@ export default function Application(props) {
           cancelInterview={cancelInterview}
           /> 
         )});
-
-        
-  
   return (
     <main className="layout">
       <section className="sidebar">
@@ -102,6 +100,7 @@ export default function Application(props) {
           days={state.days}
           day={state.day}
           setDay={setDay}
+          
           />
         </nav>
         <img
