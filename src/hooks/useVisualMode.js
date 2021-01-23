@@ -1,40 +1,27 @@
-import {useState} from 'react'
+import { useState } from "react";
 
-export function useVisualMode(initialMode) {
-  const [mode, setMode] = useState(initialMode)
-  const [history, setHistory] = useState([initialMode])
+export  function useVisualMode(initialMode) {
+  const [mode, setMode] = useState(initialMode);
+  const [history, setHistory] = useState([initialMode]);
 
-  //transistion to a new mode
-  function transition(newMode, replace= false) {
-    if(!replace) {
-      setHistory(prev => [...prev, newMode] )
-    
-  } else {
-    const newHistory = history.splice(0, 1)
-    const newHistoryAfterReplace = [...newHistory, newMode ]
-    setHistory(newHistoryAfterReplace)
-  }
-  setMode(newMode)
-  }
-
-  //go to a previous mode
-  function back() {
-    if(history.length >= 1){
-      const newHistory = history.slice(0, -1)
-      setHistory(newHistory)
-      setMode(newHistory[newHistory.length-1]);
+  function transition(newMode, replace = false) {
+    if (replace) {
+      setHistory(prev => [...prev].slice(0, -1))
     } 
+    setHistory(prev => [...prev, newMode]);
+    setMode(newMode);
   }
 
-  //transistion with replace
+  function back() {
+    if (history.length > 1) {
+      const newHistory = history.slice(0, -1);
+      setHistory(newHistory);
+      setMode(newHistory[newHistory.length -1]);
+    }
+  }
 
-
-
-  
-  return{mode, transition, back}
-
-  
-}
+  return { mode, transition, back };
+};
 
 /**
  * initial mode is first
