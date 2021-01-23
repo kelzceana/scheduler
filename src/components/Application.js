@@ -111,12 +111,33 @@ export default function Application(props) {
     return response;
   }
  
+  //FUNCTION CANCEL INTERVIEW
+  function cancelInterview (id) {
+    const nullAppointment = {
+      ...state.appointments[id],
+      interview:null
+    }
+
+    const appointments = {
+      ...state.appointments,
+      [id]: nullAppointment
+    };
+
+    const response = axios.delete(`/api/appointments/${id}`).then(() =>
+    setState({
+      ...state,
+      appointments
+    })
+  
+  )
+  return response;
+  }
 
   const setDay = day => setState({ ...state, day });
   const dailyAppointments =  getAppointmentsForDay(state, state.day);
   const schedule = dailyAppointments.map(appointment => {
       const dailyInterview = getInterview(state, appointment.interview);
-     // console.log(dailyInterview)
+    
       const interviewersArray = getInterviewersForDay(state, state.day); 
       return (
         <Appointment 
@@ -126,6 +147,7 @@ export default function Application(props) {
           time={appointment.time}
           interview= {dailyInterview}
           bookInterview= {bookInterview}
+          cancelInterview={cancelInterview}
           /> 
         )});
 
