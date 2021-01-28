@@ -26,11 +26,8 @@ export default function useApplicationData() {
   },[]);
 
   function bookInterview(id, interview) {
-    //console.log(id,interview)
     let days = state.days;
     if (!state.appointments[id].interview) {
-
-      
       days = state.days.map((day) => {
         const dayCopy = {...day};
         if (dayCopy.appointments.includes(id)){
@@ -41,9 +38,7 @@ export default function useApplicationData() {
         }
       })
     }
-
-
-
+    
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -54,14 +49,16 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    const response = axios.put(`/api/appointments/${id}`, {"interview":interview}).then(() =>
+    const response = axios.put(`/api/appointments/${id}`, {"interview":interview}).then(() =>{
+      
       setState({
         ...state,
         appointments,
         days
       })
-    
+    }
     )
+    
     return response;
   }
 
@@ -78,23 +75,25 @@ export default function useApplicationData() {
     };
 
     //UPDATE THE NUMBER OF SLOTS LEFT
-    const days = state.days.map((day) => {
-      const dayCopy = {...day};
-      if (dayCopy.appointments.includes(id)){
-        dayCopy.spots ++
-        return dayCopy
-      } else {
-        return dayCopy
-      }
-    })
+    
 
 
-    const response = axios.delete(`/api/appointments/${id}`).then(() =>
-    setState({
+    const response = axios.delete(`/api/appointments/${id}`).then(() =>{ 
+      const days = state.days.map((day) => {
+        const dayCopy = {...day};
+        if (dayCopy.appointments.includes(id)){
+          dayCopy.spots ++
+          return dayCopy
+        } else {
+          return dayCopy
+        }
+      })
+      
+      setState({
       ...state,
       appointments,
       days
-    })
+    })}
   
     )
     return response;
