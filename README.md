@@ -35,9 +35,9 @@ npm run storybook
 
 ## Dependecies
 
-axios
-classnames
-normalize.css
-react
-react-dom
-react-scripts
+- axios
+- classnames
+- normalize.css
+- react
+- react-dom
+- react-scripts
